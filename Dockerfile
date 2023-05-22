@@ -17,4 +17,4 @@ RUN npm run build
 RUN npm install -g serve
 
 # Start the server
-CMD ["serve", "-s", "dist", "-l", "0.0.0.0:8082"]
+CMD ["npx", "serve", "-s", "dist", "-l", "tcp://0.0.0.0:8082"]
