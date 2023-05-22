@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:18.16.0-alpine
+FROM node:18.16.0-alpine AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -17,4 +17,19 @@ RUN npm run build
 RUN npm install -g serve
 
 # Start the server
-CMD ["npx", "serve", "-s", "dist", "-l", "tcp://0.0.0.0:8082"]
+# CMD ["serve", "-s", "dist"]
+
+# Use the official Nginx image as the base image for the proxy server
+FROM nginx:latest
+
+# Copy the built files from the Node.js build stage to the Nginx web directory
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy the Nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80 for Nginx
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
