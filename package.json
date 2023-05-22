@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview --host=0.0.0.0 --port=3000"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
