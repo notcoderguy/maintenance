@@ -30,7 +30,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Expose port 80 for Nginx
-EXPOSE 80
+# EXPOSE 80
 
 # Start Nginx
 CMD ["/entrypoint.sh"]
