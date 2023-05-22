@@ -1,26 +1,27 @@
-# Use the official Node.js image as the base image for the build stage
-FROM node:18.16.0-alpine AS build
+# Use the official Node.js image as the base image
+FROM node:18.16.0-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the entire project to the container
-COPY . .
+# Copy the package.json and package-lock.json files to the container
+COPY package.json package-lock.json ./
 
 # Install the dependencies
 RUN npm ci --silent
 
+# Copy the source code to the container
+COPY . .
+COPY src ./src
+
 # Build the project
 RUN npm run build
 
-# Use the official Nginx image as the base image for the proxy server
-FROM nginx:latest
+# Install serve package globally
+RUN npm install -g serve
 
-# Copy the built files from the Node.js build stage to the Nginx web directory
-COPY --from=build /app/dist /usr/share/nginx/html
+# Expose port 8082 for serving the built files
+EXPOSE 8082
 
-# Copy the modified nginx.conf file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the server
+CMD ["serve", "-s", "dist", "-l", "8082"]
