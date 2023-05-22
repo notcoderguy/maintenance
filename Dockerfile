@@ -17,4 +17,4 @@ RUN npm run build
 RUN npm install -g serve
 
 # Start the server
-CMD ["serve", "-s", "dist", "-l", "8082"]
+CMD ["serve", "-s", "dist", "-l", "0.0.0.0:8082"]
