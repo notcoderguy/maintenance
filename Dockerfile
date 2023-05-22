@@ -12,6 +12,7 @@ RUN npm ci --silent
 
 # Copy the source code to the container
 COPY . .
+COPY src ./src
 
 # Build the project
 RUN npm run build
