@@ -1,24 +1,24 @@
 import { defineConfig } from 'vite';
-import { ViteMinifyPlugin } from 'vite-plugin-minify'
 
 export default defineConfig({
-    plugins: [
-        ViteMinifyPlugin({}),
-    ],
     server: {
         open: '/index.html',
+        port: 3000,
     },
     preview: {
         open: '/index.html',
+        port: 3000,
     },
-    base: '',
-    appType: 'mpa',
-    input: ['resources/css/app.css', 'resources/js/app.js'],
-    refresh: true,
+    publicDir: 'src',
     root: 'src',
+    appType: 'mpa',
     build: {
+        target: 'esnext',
+        minify: 'terser',
         assetsDir: 'assets',
         outDir: '../dist',
+        cssMinify: 'lightningcss',
         emptyOutDir: true,
+        manifest: true
     },
 });
