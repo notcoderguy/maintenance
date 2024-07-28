@@ -7,11 +7,14 @@ WORKDIR /app
 # Copy the entire project to the container
 COPY . .
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Install the dependencies
-RUN npm ci --silent
+RUN pnpm install
 
 # Build the project
-RUN npm run build
+RUN pnpm build
 
 # Use the official Nginx image as the base image for the proxy server
 FROM nginx:latest
