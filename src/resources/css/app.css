@@ -1,3 +1,77 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@font-face {
+    font-family: 'Mona Sans';
+    src: url('../font/MonaSans%5Bital,wdth,wght%5D.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-stretch: 75% 125%;
+    font-display: swap;
+}
+
+/* Base styles */
+body {
+    @apply bg-latte-base text-latte-text;
+}
+
+/* Theme variants */
+[data-theme="latte"] {
+    --bg-color: theme('colors.latte.base');
+    --text-color: theme('colors.latte.text');
+    --subtext-color: theme('colors.latte.subtext1');
+    --selection-bg: theme('colors.latte.blue');
+    --selection-text: theme('colors.latte.base');
+}
+
+[data-theme="frappe"] {
+    --bg-color: theme('colors.frappe.base');
+    --text-color: theme('colors.frappe.text');
+    --subtext-color: theme('colors.frappe.subtext1');
+    --selection-bg: theme('colors.frappe.blue');
+    --selection-text: theme('colors.frappe.base');
+}
+
+[data-theme="macchiato"] {
+    --bg-color: theme('colors.macchiato.base');
+    --text-color: theme('colors.macchiato.text');
+    --subtext-color: theme('colors.macchiato.subtext1');
+    --selection-bg: theme('colors.macchiato.blue');
+    --selection-text: theme('colors.macchiato.base');
+}
+
+[data-theme="mocha"] {
+    --bg-color: theme('colors.mocha.base');
+    --text-color: theme('colors.mocha.text');
+    --subtext-color: theme('colors.mocha.subtext1');
+    --selection-bg: theme('colors.mocha.blue');
+    --selection-text: theme('colors.mocha.base');
+}
+
+/* Apply theme variables */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-style: normal;
+}
+
+* {
+    font-style: normal;
+}
+
+h1 {
+    color: var(--text-color);
+}
+
+p {
+    color: var(--subtext-color);
+}
+
+#theme-toggle-icon {
+    color: var(--text-color);
+}
+
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
+}
